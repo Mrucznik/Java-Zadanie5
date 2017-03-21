@@ -1,37 +1,27 @@
 package pl.mrucznik;
 
-import java.io.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class Main {
 
     public static void main(String[] args) {
-
-        System.out.println("Podaj pierwszy wektor: ");
-        Vector v1;
+        Vector v1, v2, wynik;
+        VectorWriter writer = new VectorFileWriter("secretData.txt");
         VectorReader reader = new VectorStreamReader(System.in);
-        v1 = reader.read();
 
-        System.out.println(v1);
+        do {
 
-        //serializacja
-        /*try {
-            BufferedWriter fos = new BufferedWriter(new FileWriter("secretData.txt"));
+            System.out.println("Podaj pierwszy wektor: ");
+            v1 = reader.read();
+            System.out.println("Podaj drugi wektor: ");
+            v2 = reader.read();
 
-            for (Integer nob : myCoords) {
-                fos.write(nob.toString() + ", ");
-                System.out.println(nob.toString());
+            //zapis
+            try {
+                wynik = Vector.addVectors(v1, v2);
+                writer.write(wynik);
+                System.out.println("Pomyślnie dodano i zapisano wektory do pliku.");
+            } catch (WektoryRoznejDlugosciException e) {
+                System.out.println("Błąd! Wektory nie są takich samych długości!\nDlugość pierwszego wektora: " + e.v1Length + "\nDługość drugiego wektora: " + e.v2Length);
             }
-            fos.flush();
-            fos.close();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }*/
-
-        System.out.println("Podaj drugi wektor: ");
+        } while(Vector.equalSize(v1,v2));
     }
 }

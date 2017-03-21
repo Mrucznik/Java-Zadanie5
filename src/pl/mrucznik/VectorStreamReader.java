@@ -4,16 +4,16 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 public class VectorStreamReader extends VectorReader {
-    InputStream stream;
+    private InputStream stream;
 
     VectorStreamReader(InputStream stream)
     {
         this.stream = stream;
     }
 
-    Vector read()
+    public Vector read()
     {
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(stream);
         String str = input.nextLine();
         VectorStringReader reader = new VectorStringReader(str,"(\\d+)");
         return reader.read();

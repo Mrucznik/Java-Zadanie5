@@ -13,7 +13,7 @@ public class VectorStringReader extends VectorReader {
         this.regexPattern = regexPattern;
     }
 
-    Vector read()
+    public Vector read()
     {
         Vector vector = new Vector();
         Matcher matcher = Pattern.compile(regexPattern).matcher(string);
